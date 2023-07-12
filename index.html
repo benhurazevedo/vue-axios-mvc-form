@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teste</title>
+</head>
+<body>
+    <form id="app">
+        <label for="nome">Nome</label>
+        <input v-model="nome" type="text" id="nome" name="nome"><br>
+        <label for="idade">Idade</label>
+        <input v-model="idade" type="number" id="idade" name="idade"><br>
+        <button id="envair" @click="enviar" type="button">enviar</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                nome: null,
+                idade: null,
+            },
+            methods: {
+                enviar: function(){
+                    let data = new FormData(document.querySelector("form"));
+                    axios({
+                        method: "post",
+                        url: "post.php",
+                        data: data,
+                    })
+                    .then((res) => alert(res.status));
+                },
+            }
+        });
+    </script>
+</body>
+</html>
